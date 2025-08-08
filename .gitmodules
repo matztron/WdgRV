@@ -1,0 +1,3 @@
+[submodule "submodules/rggen-verilog-rtl"]
+	path = submodules/rggen-verilog-rtl
+	url = git@github.com:rggen/rggen-verilog-rtl.git
