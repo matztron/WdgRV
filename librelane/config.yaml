@@ -1,0 +1,33 @@
+# LibreLane configuration file
+
+DESIGN_NAME: wdg_top
+VERILOG_FILES:
+  - dir::../rtl/wdg_top.v
+  - dir::../rtl/cntr.v
+  - dir::../rtl/fsm.v
+  - dir::../rtl/reg/wdgrv_regs.v
+  - dir::../rtl/clkdiv.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_or_reducer.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_mux.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_or_reducer.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_mux.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_bit_field.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_bit_field_w01trg.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_address_decoder.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_register_common.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_default_register.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_external_register.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_indirect_register.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_adapter_common.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_apb_adapter.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_apb_bridge.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_axi4lite_skid_buffer.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_axi4lite_adapter.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_axi4lite_bridge.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_avalon_adapter.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_avalon_bridge.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_wishbone_adapter.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_wishbone_bridge.v
+  - dir::../submodules/rggen-verilog-rtl/rggen_native_adapter.v
+CLOCK_PORT: clk
+CLOCK_PERIOD: 10 # 10ns = 100MHz

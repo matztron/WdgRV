@@ -1,0 +1,38 @@
+%Error: /home/mat/WORK_DIR/watchdog_riscv_zf/rtl/reg/wdgrv_regs.v:1:10: Cannot find include file: rggen_rtl_macros.vh
+    1 | `include "rggen_rtl_macros.vh"
+      |          ^~~~~~~~~~~~~~~~~~~~~
+%Error: /home/mat/WORK_DIR/watchdog_riscv_zf/rtl/reg/wdgrv_regs.v:1:10: This may be because there's no search path specified with -I<dir>.
+    1 | `include "rggen_rtl_macros.vh"
+      |          ^~~~~~~~~~~~~~~~~~~~~
+        ... Looked in:
+             rggen_rtl_macros.vh
+             rggen_rtl_macros.vh.v
+             rggen_rtl_macros.vh.sv
+             obj_dir/rggen_rtl_macros.vh
+             obj_dir/rggen_rtl_macros.vh.v
+             obj_dir/rggen_rtl_macros.vh.sv
+%Error: /home/mat/WORK_DIR/watchdog_riscv_zf/rtl/reg/wdgrv_regs.v:89:5: Define or directive not defined: '`rggen_tie_off_unused_signals'
+   89 |     `rggen_tie_off_unused_signals(32, 32'hffffffff, w_bit_field_read_data, w_bit_field_value)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: /home/mat/WORK_DIR/watchdog_riscv_zf/rtl/reg/wdgrv_regs.v:89:34: syntax error, unexpected '('
+   89 |     `rggen_tie_off_unused_signals(32, 32'hffffffff, w_bit_field_read_data, w_bit_field_value)
+      |                                  ^
+%Error: /home/mat/WORK_DIR/watchdog_riscv_zf/rtl/reg/wdgrv_regs.v:177:30: Define or directive not defined: '`RGGEN_READ_DEFAULT'
+  177 |         .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
+      |                              ^~~~~~~~~~~~~~~~~~~
+%Error: /home/mat/WORK_DIR/watchdog_riscv_zf/rtl/reg/wdgrv_regs.v:178:30: Define or directive not defined: '`RGGEN_WRITE_0_CLEAR'
+  178 |         .SW_WRITE_ACTION    (`RGGEN_WRITE_0_CLEAR),
+      |                              ^~~~~~~~~~~~~~~~~~~~
+%Error: /home/mat/WORK_DIR/watchdog_riscv_zf/rtl/reg/wdgrv_regs.v:210:30: Define or directive not defined: '`RGGEN_READ_DEFAULT'
+  210 |         .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
+      |                              ^~~~~~~~~~~~~~~~~~~
+%Error: /home/mat/WORK_DIR/watchdog_riscv_zf/rtl/reg/wdgrv_regs.v:211:30: Define or directive not defined: '`RGGEN_WRITE_0_CLEAR'
+  211 |         .SW_WRITE_ACTION    (`RGGEN_WRITE_0_CLEAR),
+      |                              ^~~~~~~~~~~~~~~~~~~~
+%Error: /home/mat/WORK_DIR/watchdog_riscv_zf/rtl/reg/wdgrv_regs.v:303:5: Define or directive not defined: '`rggen_tie_off_unused_signals'
+  303 |     `rggen_tie_off_unused_signals(32, 32'hffffffff, w_bit_field_read_data, w_bit_field_value)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: /home/mat/WORK_DIR/watchdog_riscv_zf/rtl/reg/wdgrv_regs.v:303:34: syntax error, unexpected '('
+  303 |     `rggen_tie_off_unused_signals(32, 32'hffffffff, w_bit_field_read_data, w_bit_field_value)
+      |                                  ^
+%Error: Exiting due to 10 error(s)

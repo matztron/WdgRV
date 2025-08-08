@@ -1,0 +1,76 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Thu Aug  7 14:27:33 2025
+[*]
+[dumpfile] "/home/mat/WORK_DIR/watchdog_riscv_zf/sim/out/wdg_rv_out.vcd"
+[dumpfile_mtime] "Thu Aug  7 14:22:04 2025"
+[dumpfile_size] 114877
+[savefile] "/home/mat/WORK_DIR/watchdog_riscv_zf/sim/wdg_sim.gtkw"
+[timestart] 0
+[size] 1854 986
+[pos] -1 -1
+*-8.303751 254 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] wdg_tb.
+[treeopen] wdg_tb.wdg_rv_inst.
+[sst_width] 297
+[signals_width] 291
+[sst_expanded] 1
+[sst_vpaned_height] 292
+@200
+-SYSTEM STUFF
+@28
+wdg_tb.clk_tb
+wdg_tb.res_n_tb
+@200
+-MTIME
+-Use the 2nd bit of MTIME:
+-
+-WDG
+--> FSM
+@28
+wdg_tb.wdg_rv_inst.cntr_inst.res_n
+wdg_tb.wdg_rv_inst.fsm_inst.clk
+@200
+-  -> FSM States
+@24
+wdg_tb.wdg_rv_inst.fsm_inst.S_IDLE
+wdg_tb.wdg_rv_inst.fsm_inst.S_CNT0
+wdg_tb.wdg_rv_inst.fsm_inst.S_RAISE_S1
+wdg_tb.wdg_rv_inst.fsm_inst.S_CNT1
+wdg_tb.wdg_rv_inst.fsm_inst.S_RAISE_S2
+@200
+-
+-STATES
+@24
+wdg_tb.wdg_rv_inst.fsm_inst.state[2:0]
+wdg_tb.wdg_rv_inst.fsm_inst.next_state[2:0]
+@200
+-
+--> FSM Inputs
+@22
+wdg_tb.wdg_rv_inst.fsm_inst.inp[3:0]
+@29
+wdg_tb.wdg_rv_inst.fsm_inst.count0
+@28
+wdg_tb.wdg_rv_inst.fsm_inst.sw_trg_s1wto
+wdg_tb.wdg_rv_inst.fsm_inst.sw_trg_s2wto
+wdg_tb.wdg_rv_inst.fsm_inst.en
+@200
+--> FSM Outputs
+@28
+wdg_tb.wdg_rv_inst.fsm_inst.do_cnt
+wdg_tb.wdg_rv_inst.fsm_inst.s1wto
+wdg_tb.wdg_rv_inst.fsm_inst.s2wto
+@200
+--> Timeout counter
+@28
+wdg_tb.wdg_rv_inst.cntr_inst.res_n
+@420
+wdg_tb.wdg_rv_inst.cntr_inst.WIDTH
+@28
+wdg_tb.wdg_rv_inst.cntr_inst.mtick_clk
+@22
+wdg_tb.wdg_rv_inst.cntr_inst.count_wdg[9:0]
+wdg_tb.wdg_rv_inst.cntr_inst.init_cnt[9:0]
+[pattern_trace] 1
+[pattern_trace] 0

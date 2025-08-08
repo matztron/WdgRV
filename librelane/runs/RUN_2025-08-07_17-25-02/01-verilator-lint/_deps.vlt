@@ -1,0 +1,5 @@
+`verilator_config
+lint_off -rule DECLFILENAME
+lint_off -rule EOFNEWLINE
+lint_off -rule UNDRIVEN -file "/home/mat/WORK_DIR/watchdog_riscv_zf/librelane/runs/RUN_2025-08-07_17-25-02/tmp/da30721ddf8f45518db57335ae72ac54.bb.v"
+lint_off -rule UNUSEDSIGNAL -file "/home/mat/WORK_DIR/watchdog_riscv_zf/librelane/runs/RUN_2025-08-07_17-25-02/tmp/da30721ddf8f45518db57335ae72ac54.bb.v"

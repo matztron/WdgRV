@@ -1,0 +1,1 @@
+rggen --configuration design_cfg.yml reg_map_spec.rb
