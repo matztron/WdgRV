@@ -49,18 +49,19 @@ module reset_ctrl #(
 
     // combinational transition block
     always @(*) begin
-        casex ({inp, state})
-            {4'b0xxx, S_IDLE}: next_state <= S_IDLE;
-            {4'b1xxx, S_IDLE}: next_state <= S_CORE_RST;
+        casez ({inp, state})
+            {4'b0???, S_IDLE}: next_state = S_IDLE;
+            {4'b1???, S_IDLE}: next_state = S_CORE_RST;
 
-            {4'bx0xx, S_CORE_RST}: next_state <= S_CORE_RST;
-            {4'bx1xx, S_CORE_RST}: next_state <= S_PADDING;
+            {4'b?0??, S_CORE_RST}: next_state = S_CORE_RST;
+            {4'b?1??, S_CORE_RST}: next_state = S_PADDING;
 
-            {4'bxx0x, S_PADDING}: next_state <= S_PADDING;
-            {4'bxx1x, S_PADDING}: next_state <= S_WDG_RST;
+            {4'b??0?, S_PADDING}: next_state = S_PADDING;
+            {4'b??1?, S_PADDING}: next_state = S_WDG_RST;
 
-            {4'bxxx0, S_WDG_RST}: next_state <= S_WDG_RST;
-            {4'bxxx1, S_WDG_RST}: next_state <= S_IDLE;
+            {4'b???0, S_WDG_RST}: next_state = S_WDG_RST;
+            {4'b???1, S_WDG_RST}: next_state = S_IDLE;
+            default: next_state = state;
         endcase
     end
 
