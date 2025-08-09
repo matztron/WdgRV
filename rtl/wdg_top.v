@@ -35,8 +35,8 @@ module wdg_top #(
   output o_wb_rty,
   output [WB_DATA_WIDTH-1:0] o_wb_dat,
   // ---
-  output irq1,                                  // stage 1 watchdog timeout
-  output irq2                                   // stage 2 watchdog timeout
+  output o_irq1,                                  // stage 1 watchdog timeout
+  output o_irq2                                   // stage 2 watchdog timeout
 
   //input wdg_tick
 

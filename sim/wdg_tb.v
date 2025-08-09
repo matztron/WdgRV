@@ -56,9 +56,11 @@ module wdg_tb();
         .o_wb_ack(wb_ack_tb),
         .o_wb_err(),
         .o_wb_rty(),
-        .o_wb_dat(wb_dat_r_tb)
+        .o_wb_dat(wb_dat_r_tb),
         // ---
         //.wdg_tick(wdg_tick_tb)
+        .o_irq1(),
+        .o_irq2()
     );
     // ---
 
