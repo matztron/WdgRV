@@ -1,19 +1,19 @@
 [*]
 [*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
-[*] Thu Aug  7 14:27:33 2025
+[*] Fri Aug  8 10:14:17 2025
 [*]
 [dumpfile] "/home/mat/WORK_DIR/watchdog_riscv_zf/sim/out/wdg_rv_out.vcd"
-[dumpfile_mtime] "Thu Aug  7 14:22:04 2025"
-[dumpfile_size] 114877
+[dumpfile_mtime] "Fri Aug  8 09:49:01 2025"
+[dumpfile_size] 121309
 [savefile] "/home/mat/WORK_DIR/watchdog_riscv_zf/sim/wdg_sim.gtkw"
 [timestart] 0
 [size] 1854 986
 [pos] -1 -1
-*-8.303751 254 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-8.308390 1025 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] wdg_tb.
 [treeopen] wdg_tb.wdg_rv_inst.
 [sst_width] 297
-[signals_width] 291
+[signals_width] 271
 [sst_expanded] 1
 [sst_vpaned_height] 292
 @200
@@ -47,11 +47,10 @@ wdg_tb.wdg_rv_inst.fsm_inst.next_state[2:0]
 @200
 -
 --> FSM Inputs
-@22
+@23
 wdg_tb.wdg_rv_inst.fsm_inst.inp[3:0]
-@29
-wdg_tb.wdg_rv_inst.fsm_inst.count0
 @28
+wdg_tb.wdg_rv_inst.fsm_inst.count0
 wdg_tb.wdg_rv_inst.fsm_inst.sw_trg_s1wto
 wdg_tb.wdg_rv_inst.fsm_inst.sw_trg_s2wto
 wdg_tb.wdg_rv_inst.fsm_inst.en
@@ -72,5 +71,25 @@ wdg_tb.wdg_rv_inst.cntr_inst.mtick_clk
 @22
 wdg_tb.wdg_rv_inst.cntr_inst.count_wdg[9:0]
 wdg_tb.wdg_rv_inst.cntr_inst.init_cnt[9:0]
+@200
+-
+-Presentation
+-
+-Wdg Timeout Counter
+@22
+wdg_tb.wdg_rv_inst.cntr_inst.init_cnt[9:0]
+wdg_tb.wdg_rv_inst.cntr_inst.count_wdg[9:0]
+@200
+-
+-Wdg IRQ sources
+@28
+wdg_tb.wdg_rv_inst.irq1
+wdg_tb.wdg_rv_inst.irq2
+@200
+-
+-SW Resets
+@28
+wdg_tb.wdg_rv_inst.fsm_inst.sw_trg_s1wto
+wdg_tb.wdg_rv_inst.fsm_inst.sw_trg_s2wto
 [pattern_trace] 1
 [pattern_trace] 0

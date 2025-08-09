@@ -94,7 +94,7 @@ module wdg_top #(
     .o_wdcsr_s2wto_write_trigger(sw_trg_s2wto),     // signals sw has written (thus cleared) bit field
     .o_wdcsr_wtocnt(wdcsr_wtocnt),                  // SW should not write a 0 here!
     .i_wdcsr_rvd2(), // NC!
-    .i_wdcnt_cnt(cnt)   //TODO                      // Plattform specific: Tell SW how far along timeout count is
+    .i_wdcnt_cnt({22'b0, cnt})   //TODO                      // Plattform specific: Tell SW how far along timeout count is
   );
 
   // FSM
@@ -135,7 +135,7 @@ module wdg_top #(
   // Determine if count reached 0
   assign cnt0 = (cnt == 0) ? 1'b1 : 1'b0;
 
-  assign irq1 = wdcsr_s1wto;
-  assign irq2 = wdcsr_s2wto;
+  assign o_irq1 = wdcsr_s1wto;
+  assign o_irq2 = wdcsr_s2wto;
 
 endmodule

@@ -13,7 +13,7 @@ REG_OUTPUT_DIR = $(RTL_PATH)/reg/
 # wdg & mtime memory mapped register design
 #DESIGN_SOURCES = $(RTL_PATH)/wdg_top.v $(RTL_PATH)/mtime_top.v $(RTL_PATH)/cntr.v $(RTL_PATH)/fsm.v $(RTL_PATH)/reg/wdgrv_regs.v $(RTL_PATH)/reg/machine_time.v $(RTL_PATH)/wdg_interface_def.h
 # only wdg
-DESIGN_SOURCES = $(RTL_PATH)/wdg_top.v $(RTL_PATH)/cntr.v $(RTL_PATH)/fsm.v $(RTL_PATH)/reg/wdgrv_regs.v $(RTL_PATH)/clkdiv.v $(RTL_PATH)/wdg_interface_def.h
+DESIGN_SOURCES = $(RTL_PATH)/wdg_top.v $(RTL_PATH)/cntr.v $(RTL_PATH)/fsm.v $(RTL_PATH)/reg/wdgrv_regs.v $(RTL_PATH)/clkdiv.v $(RTL_PATH)/wdg_interface_def.h $(RTL_PATH)/reset_ctrl.v
 
 DESIGN_SOURCES_FLAT = -I${RGGEN_VERILOG_RTL_ROOT} \
 	${RGGEN_VERILOG_RTL_ROOT}/rggen_or_reducer.v \

@@ -28,6 +28,10 @@ module wdg_tb();
     wire        wb_ack_tb;
     wire        wb_stall_tb;
 
+    wire wdg_to;
+    wire wdg_res_n;
+    wire core_res_n;
+
     //reg [63:0] mtime_tb;
 
     //wire wdg_tick_tb;
@@ -44,7 +48,7 @@ module wdg_tb();
         .WB_DATA_WIDTH(WB_DATA_WIDTH)
     ) wdg_rv_inst (
         .clk(clk_tb),
-        .res_n(res_n_tb),
+        .res_n(res_n_tb & wdg_res_n),
         // Wishbone interface
         .i_wb_cyc(wb_cyc_tb),
         .i_wb_stb(wb_stb_tb),
@@ -58,11 +62,23 @@ module wdg_tb();
         .o_wb_rty(),
         .o_wb_dat(wb_dat_r_tb),
         // ---
-        //.wdg_tick(wdg_tick_tb)
         .o_irq1(),
-        .o_irq2()
+        .o_irq2(wdg_to)
     );
     // ---
+
+    reset_ctrl #(
+        .CORE_RST_CYCLES(60),
+        .PADDING_CYCLES(1),
+        .WDG_RST_CYCLES(1)        
+    ) reset_ctrl_inst (
+        .clk(clk_tb),
+        .sys_res_n(res_n_tb),
+
+        .wdg_to(wdg_to),
+        .wdg_res_n(wdg_res_n),
+        .core_res_n(core_res_n)
+    );
 
     // MTIME register
     /*mtime_rv #(
@@ -166,16 +182,20 @@ module wdg_tb();
         #10;
         wishbone_readwdg();
 
+        #300;
+
+        wishbone_set_wdcsr(1'b1, 10'h10);
+
         #200;
 
 
         //wishbone_set_wdcsr(1'b1, 10'h1);
 
-        #1000;
+        #500;
 
         wishbone_set_wdcsr(1'b1, 10'h10);
 
-        #200;
+        #2000;
 
         $finish;
     end

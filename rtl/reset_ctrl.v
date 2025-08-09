@@ -12,12 +12,12 @@
 module reset_ctrl #(
     parameter CORE_RST_CYCLES = 60,     // cycles for which CORE is held in reset after watchdog timeout is received
     parameter PADDING_CYCLES = 5,       // must be at least 1
-    parameter WDG_RST_CYCLES = 1,       // cycles for which WDG is held in reset after CORE was reset        
+    parameter WDG_RST_CYCLES = 1        // cycles for which WDG is held in reset after CORE was reset        
 ) (
     input clk,          // system clock
     input sys_res_n,
 
-    input wdg_to        // watchdog timeout
+    input wdg_to,       // watchdog timeout
     output wdg_res_n,   // AND-ed together with System RST_N and connected to WDG active-low reset
     output core_res_n   // AND-ed together with System RST_N and connected to CORE active-low reset 
 );
@@ -25,7 +25,7 @@ module reset_ctrl #(
     localparam MAX_COUNT_CYCLES = CORE_RST_CYCLES + PADDING_CYCLES + WDG_RST_CYCLES;
 
     //
-    wire [$clog2(MAX_COUNT_CYCLES)-1:0] cnt;
+    reg [$clog2(MAX_COUNT_CYCLES)-1:0] cnt;
     wire do_cnt;
 
     wire done_reset_core;
@@ -42,10 +42,10 @@ module reset_ctrl #(
     parameter S_WDG_RST     = 3'b101; // RST_CORE: 1 | RST_WDG: 0 | DO_CNT: 1
 
     wire [3:0] inp;
-    reg [3:0] state, next_state;
+    reg [2:0] state, next_state;
 
     assign inp = {wdg_to, done_reset_core, done_padding, done_reset_wdg};
-    assign {core_res_n, wdg_res_n, do_cnt, h1} = state;
+    assign {core_res_n, wdg_res_n, do_cnt} = state;
 
     // combinational transition block
     always @(*) begin
@@ -67,7 +67,7 @@ module reset_ctrl #(
     // Register stage
     always @(posedge clk) begin
         if (~sys_res_n) begin
-            state <= IDLE;
+            state <= S_IDLE;
         end
         else begin
             state <= next_state;
@@ -78,11 +78,11 @@ module reset_ctrl #(
 
     assign done_reset_core = (cnt == CORE_RST_CYCLES-1) ? 1'b1 : 1'b0;
     assign done_padding = (cnt == CORE_RST_CYCLES + PADDING_CYCLES) ? 1'b1 : 1'b0;
-    assign done_reset_wdg = (cnt < CORE_RST_CYCLES + PADDING_CYCLES + WDG_RST_CYCLES) ? 1'b1 : 1'b0;
+    assign done_reset_wdg = (cnt == CORE_RST_CYCLES + PADDING_CYCLES + WDG_RST_CYCLES) ? 1'b1 : 1'b0;
 
     // counter
     always @(posedge clk) begin
-        if (~res_n) begin
+        if (~sys_res_n) begin
             cnt <= 0;
         end else begin
             if (do_cnt) begin
