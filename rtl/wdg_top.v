@@ -117,7 +117,7 @@ module wdg_top #(
   ) cntr_inst (
     .mtick_clk(wdg_tick),
     .res_n(res_n & do_cnt),
-    .init_cnt(wdcsr_wtocnt),
+    .cnt_thrhd(wdcsr_wtocnt),
     .count_wdg(cnt)
   );
 
@@ -133,7 +133,7 @@ module wdg_top #(
   );
 
   // Determine if count reached 0
-  assign cnt0 = (cnt == 0) ? 1'b1 : 1'b0;
+  assign cnt0 = (cnt == wdcsr_wtocnt) ? 1'b1 : 1'b0;
 
   assign o_irq1 = wdcsr_s1wto;
   assign o_irq2 = wdcsr_s2wto;
