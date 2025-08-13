@@ -3,11 +3,11 @@
 module wdg_tb();
 
     parameter WB_DATA_WIDTH = 32;
-    parameter WB_ADDR_WIDTH = 4;
+    parameter WB_ADDR_WIDTH = 32;
 
     // Poor mans register map
     parameter WB_WDG_BASE = 0;
-    parameter WB_MTIME_BASE = 4;
+    //parameter WB_MTIME_BASE = 4;
 
     // !!!
     // 2: only every 4th clock tick will toggle wdg timer bit
@@ -30,7 +30,17 @@ module wdg_tb();
 
     wire wdg_to;
     wire wdg_res_n;
+    wire wdg_res_en_n;
     wire core_res_n;
+    wire core_res_en_n;
+
+    reg gpo; // gpo pin of core to mask wdg
+
+
+
+    assign wdg_res_n = res_n_tb & wdg_res_en_n;
+    // wdg_res_en_n is gated by ~gpo[1] (inverted as init by 0)
+    assign core_res_n = res_n_tb & (core_res_en_n & ~gpo);
 
     //reg [63:0] mtime_tb;
 
@@ -44,11 +54,13 @@ module wdg_tb();
         .REG_ERROR_STATUS(0),
         .REG_DEFAULT_READ(0),
         .REG_INSERT_SLICER(0),
-        .REG_USE_STALLS(1),
-        .WB_DATA_WIDTH(WB_DATA_WIDTH)
+        .REG_USE_STALLS(0),
+        .WB_DATA_WIDTH(WB_DATA_WIDTH),
+        .WDG_PRECLKDIV_WIDTH(20),
+        .WDG_TICK_BIT(WDG_TICK_BIT)
     ) wdg_rv_inst (
         .clk(clk_tb),
-        .res_n(res_n_tb & wdg_res_n),
+        .res_n(wdg_res_n),
         // Wishbone interface
         .i_wb_cyc(wb_cyc_tb),
         .i_wb_stb(wb_stb_tb),
@@ -76,47 +88,9 @@ module wdg_tb();
         .sys_res_n(res_n_tb),
 
         .wdg_to(wdg_to),
-        .wdg_res_n(wdg_res_n),
-        .core_res_n(core_res_n)
+        .wdg_res_n(wdg_res_en_n),
+        .core_res_n(core_res_en_n)
     );
-
-    // MTIME register
-    /*mtime_rv #(
-        .REG_ADDRESS_WIDTH(3),
-        .REG_PRE_DECODE(0),
-        .REG_BASE_ADDRESS(WB_MTIME_BASE),
-        .REG_ERROR_STATUS(0),
-        .REG_DEFAULT_READ(0),
-        .REG_INSERT_SLICER(0),
-        .REG_USE_STALLS(1),
-
-        .WB_DATA_WIDTH(32),
-        .WDG_TICK_BIT(WDG_TICK_BIT),
-
-        .CNTR_WIDTH(64) // see RISC-V spec
-    ) mtime_rv_inst (
-        //
-        .clk(clk_tb),
-        .res_n(res_n_tb),
-
-        // Wishbone interface
-        .i_wb_cyc(wb_cyc_tb),
-        .i_wb_stb(wb_stb_tb),
-        .o_wb_stall(wb_stall_tb),
-        .i_wb_adr(wb_adr_tb), // note: bit length mismatch (acceptable)
-        .i_wb_we(wb_we_tb),
-        .i_wb_dat(wb_dat_w_tb),
-        .i_wb_sel(wb_sel_tb),
-        .o_wb_ack(wb_ack_tb),
-        .o_wb_err(),
-        .o_wb_rty(),
-        .o_wb_dat(wb_dat_r_tb),
-        // ---
-
-        // dedicated port for watchdog to get mtime ticks
-        .wdg_tick(wdg_tick_tb)
-    );*/
-    // ---
 
     // clock generation
     initial begin
@@ -149,6 +123,8 @@ module wdg_tb();
         // mtime
         //mtime_tb = 64'd0;
 
+        gpo = 1'b0;
+
 
         // initial reset
         res_n_tb = 1'b0;
@@ -160,6 +136,8 @@ module wdg_tb();
         //wishbone_set_mtime(64'hAFFE);
 
         #200;
+
+        gpo = 1'b1;
 
         // Wisbone communication goes here
         wishbone_set_wdcsr(1'b1, 10'h10);
@@ -230,6 +208,7 @@ module wdg_tb();
             wb_cyc_tb   = 1;
             wb_stb_tb   = 1;
 
+            @(posedge clk_tb);
 
             // Display transaction details
             $display("----------------------------------");
