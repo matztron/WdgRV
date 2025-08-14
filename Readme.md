@@ -44,9 +44,44 @@ The waveform shows
 
 > GPO = 1: Watchdog interrupts reset the core via the reset logic.
 
-# Notes for SW
-Program wdg time when the watchdog is not enabled.
-
 # Watchdog register map
 
+| Field | Bits  | Description  |
+|---|---|---|
+| WDEN  | 0:0  | Enable the watchdog timer  |
+| RESERVED  | 1:1  | Reserved for future use  |
+| S1WTO  | 2:2  | Stage 1 watchdog timeout  |
+| S2WTO  | 3:3  | Stage 2 watchdog timeout  |
+| WTOCNT  | 13:4  | Watchdog timeout count  |
+| RESERVED  | 31:9  | Reserved for future use  |
+
+see: https://github.com/riscvarchive/riscv-watchdog/blob/main/riscv-watchdog.adoc
+
+| Field | Bits | Description |
+|---|---|---|
+| CNT | 9:0  | Current count value of timeout counter  |
+| RESERVED  | 31:10  | Reserved for future use  |
+The timeout counter counts upwards up till
+
+# Notes for SW
+*Program WTOCNT value via SW only when the watchdog is not enabled*
+
+Otherwise unintended behavior can occure i.e when the free running watchdog timer just then suddenly hits the newly programmed value. Then system would go into reset!
+
 # Watchdog Timeout Time Calculation
+Timeout period of the watchdog depends on the following parameters:
+- **N**: WTOCNT value (10 bit field)
+- **M**: System clock resolution (period)
+- **B**: Bit position of clock divider
+
+A clock divider reduces the system clock to a watchdog tick source.
+The bit position value of the clock divider is set during synthesis time. Thus in an ASIC it is fixed.
+Default implementation: *Bit 19*
+
+**t_timeout_period** = **N** * **M** * 2^(**B**+1)
+
+Example:
+Given a clock speed of **M=20MHz** -> period = 50ns
+And **N** being set to the highest value = 0x3FF (dec: 1023)
+
+**t_timeout_period** = 1023 * 50ns * 2^(19+1) = 53s
