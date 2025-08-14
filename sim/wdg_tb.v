@@ -1,4 +1,4 @@
-//`include "rtl/wdg_interface_def.h"
+`timescale 10ns/1ns
 
 module wdg_tb();
 
@@ -40,11 +40,7 @@ module wdg_tb();
 
     assign wdg_res_n = res_n_tb & wdg_res_en_n;
     // wdg_res_en_n is gated by ~gpo[1] (inverted as init by 0)
-    assign core_res_n = res_n_tb & (core_res_en_n & ~gpo);
-
-    //reg [63:0] mtime_tb;
-
-    //wire wdg_tick_tb;
+    assign core_res_n = res_n_tb & (core_res_en_n | ~gpo);
 
     // >>> UUT <<<
     wdg_top #(
@@ -82,7 +78,7 @@ module wdg_tb();
     reset_ctrl #(
         .CORE_RST_CYCLES(60),
         .PADDING_CYCLES(1),
-        .WDG_RST_CYCLES(1)        
+        .WDG_RST_CYCLES(5)        
     ) reset_ctrl_inst (
         .clk(clk_tb),
         .sys_res_n(res_n_tb),
@@ -97,13 +93,6 @@ module wdg_tb();
         clk_tb = 1'b0;
         forever #1 clk_tb = ~clk_tb;
     end
-
-    // task to write to MTIME register periodically
-    /*initial begin
-        forever begin
-            // verilog task to write MTIME reg
-        end
-    end*/
 
     reg [31:0] rd_data;
     integer mtime_loop_int;
@@ -120,9 +109,6 @@ module wdg_tb();
         wb_dat_w_tb = 0;
         wb_sel_tb   = 0;
 
-        // mtime
-        //mtime_tb = 64'd0;
-
         gpo = 1'b0;
 
 
@@ -136,8 +122,6 @@ module wdg_tb();
         //wishbone_set_mtime(64'hAFFE);
 
         #200;
-
-        gpo = 1'b1;
 
         // Wisbone communication goes here
         wishbone_set_wdcsr(1'b1, 10'h10);
@@ -173,16 +157,14 @@ module wdg_tb();
 
         wishbone_set_wdcsr(1'b1, 10'h10);
 
+        #200;
+
+        gpo = 1'b1;
+
         #2000;
 
         $finish;
     end
-
-    // Wishbone Ack monitor
-    /*always @(posedge clk_tb) begin
-        if (wait_for_ack)
-            #1 $display("Time: %0t | wb_ack_tb = %b | wb_stall_tb = %b", $time, wb_ack_tb, wb_stall_tb);
-    end*/
 
     integer timeout;
     // Verilog tasks for Wishbone communication
@@ -269,21 +251,6 @@ module wdg_tb();
 
         end
     endtask
-
-    /*task automatic wishbone_set_mtime;
-        input [63:0] mtime_w; // write val for mtime
-
-        begin
-            // incr counter
-            //mtime_tb = mtime_tb + 1;
-
-            // write lower 32bit
-            wishbone_transaction(1'b1, WB_MTIME_BASE, mtime_w[31:0], 4'b1111, rd_data);
-
-            // write upper 32bit
-            wishbone_transaction(1'b1, WB_MTIME_BASE+4, mtime_w[63:32], 4'b1111, rd_data);
-        end
-    endtask*/
 
     task automatic wishbone_readwdg;
         reg [31:0] rdata;

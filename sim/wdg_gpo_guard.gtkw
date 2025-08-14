@@ -1,0 +1,42 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Thu Aug 14 05:26:41 2025
+[*]
+[dumpfile] "/home/user/eda/designs/FazyRV-ExoTiny/WdgRV/sim/out/wdg_rv_out.vcd"
+[dumpfile_mtime] "Thu Aug 14 05:20:53 2025"
+[dumpfile_size] 162056
+[savefile] "/home/user/eda/designs/FazyRV-ExoTiny/WdgRV/sim/wdg_gpo_guard.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] 134 51
+*-10.406185 1531 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 276
+[signals_width] 158
+[sst_expanded] 1
+[sst_vpaned_height] 158
+@28
+wdg_tb.clk_tb
+@200
+-
+-System reset
+@28
+wdg_tb.res_n_tb
+@200
+-
+@28
+wdg_tb.core_res_n
+wdg_tb.wdg_res_n
+@200
+-
+@28
+wdg_tb.core_res_en_n
+wdg_tb.wdg_res_en_n
+@200
+-
+-Guarding GPO pin
+@28
+wdg_tb.gpo
+@29
+wdg_tb.wdg_to
+[pattern_trace] 1
+[pattern_trace] 0
