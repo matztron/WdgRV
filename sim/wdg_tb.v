@@ -129,11 +129,11 @@ module wdg_tb();
         #20;
 
         // Do more stuff here
-        wishbone_set_wdcsr(1'b1, 10'h10);
+        wishbone_set_wdcsr(1'b0, 10'h10);
 
         #200
 
-        wishbone_set_wdcsr(1'b1, 10'h10);
+        wishbone_set_wdcsr(1'b1, 10'hFF);
 
         $display("Sequence of reading the watchdog timer value");
         wishbone_readwdg();
@@ -146,7 +146,7 @@ module wdg_tb();
 
         #300;
 
-        wishbone_set_wdcsr(1'b1, 10'h10);
+        wishbone_set_wdcsr(1'b1, 10'hAA);
 
         #200;
 
