@@ -85,7 +85,7 @@ module wdg_top #(
 
     // Registers
     .o_wdcsr_wden(wdcsr_wden),
-    .i_wdcsr_rvd1(), // NC!
+    .i_wdcsr_rvd1('b0), // NC!
     .o_wdcsr_s1wto(), // NC!
     .i_wdcsr_s1wto_hw_set(wdcsr_s1wto),
     .o_wdcsr_s1wto_write_trigger(sw_trg_s1wto),     // signals sw has written (thus cleared) bit field
@@ -93,7 +93,7 @@ module wdg_top #(
     .i_wdcsr_s2wto_hw_set(wdcsr_s2wto),
     .o_wdcsr_s2wto_write_trigger(sw_trg_s2wto),     // signals sw has written (thus cleared) bit field
     .o_wdcsr_wtocnt(wdcsr_wtocnt),                  // SW should not write a 0 here!
-    .i_wdcsr_rvd2(), // NC!
+    .i_wdcsr_rvd2('b0), // NC!
     .i_wdcnt_cnt({22'b0, cnt})   //TODO                      // Plattform specific: Tell SW how far along timeout count is
   );
 
